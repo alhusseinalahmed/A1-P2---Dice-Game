@@ -13,5 +13,9 @@ public class Scoreboard {
   public void updateScore(String name, int score) {
     scores.put(name, score);
   }
+
+  public Map<String, Integer> getAllScores() {
+    return new HashMap<>(scores);
+  }
   
 }
