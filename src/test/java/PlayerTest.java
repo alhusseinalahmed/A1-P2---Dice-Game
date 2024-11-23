@@ -1,6 +1,5 @@
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import com.example.dicegame.Player;
 
@@ -14,8 +13,16 @@ public class PlayerTest {
   void setUp() {
     player = new Player("John");
   }
+
   @Test
-  void playerShouldStartWithZeroScore(){
+  void playerShouldStartWithZeroScore() {
     assertEquals(0, player.getScore(), "Player should start with zero score");
-  }  
+  }
+
+  @Test
+  void playerShouldAddScoreCorrectly() {
+    player.addScore(5);
+    assertEquals(5, player.getScore(), "Player should have 5 points");
+  }
+
 }
