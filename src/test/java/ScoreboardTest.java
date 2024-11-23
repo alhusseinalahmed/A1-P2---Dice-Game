@@ -13,7 +13,6 @@ public class ScoreboardTest {
 
   @Test
   void shouldInitializeWithZeroScores() {
-    Scoreboard scoreboard = new Scoreboard();
     assertEquals(0, scoreboard.getScore("Player 1"), "Player 1's score should be 0 initially.");
   }
 }
