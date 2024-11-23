@@ -6,6 +6,7 @@ public class Game {
 
   private final Scoreboard scoreboard = new Scoreboard();
   private ArrayList<Player> players = new ArrayList<>();
+  private Dice dice = new Dice();
 
   public Game(ArrayList<Player> players) {
     if(players.size() < 2) throw new IllegalArgumentException("Game should have at least two players.");
@@ -14,5 +15,12 @@ public class Game {
 
   public ArrayList<Player> getPlayers() {
     return this.players;
+  }
+
+  public int rollDice(Player player) {
+    int diceScore = dice.roll();
+    player.addScore(diceScore);
+    scoreboard.updateScore(player.getName(), player.getScore());
+    return diceScore;
   }
 }

@@ -38,9 +38,9 @@ public class GameTest {
   }
   @Test
   void shouldUpdateScoreAfterRoll() {
-    game.rollDice(game.getPlayers().get(0), 5);
+    int diceScore = game.rollDice(game.getPlayers().get(0));
 
-    assertEquals(game.getPlayers().get(0).getScore(), 5);
+    assertEquals(game.getPlayers().get(0).getScore(), diceScore);
 
   }
 
