@@ -29,12 +29,19 @@ public class GameTest {
     Exception exception = null;
     try {
       ArrayList<Player> players = new ArrayList<>();
-      Game invalidGame = new Game(players);
+      new Game(players);
     } catch (IllegalArgumentException e) {
       exception = e;
     }
     assertEquals("Game should have at least two players.", exception.getMessage(),
         "Exception message should indicate insufficient players.");
+  }
+  @Test
+  void shouldUpdateScoreAfterRoll() {
+    game.rollDice(game.getPlayers().get(0), 5);
+
+    assertEquals(game.getPlayers().get(0).getScore(), 5);
+
   }
 
 }
