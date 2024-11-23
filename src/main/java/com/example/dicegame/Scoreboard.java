@@ -11,7 +11,7 @@ public class Scoreboard {
   }
 
   public void updateScore(String name, int score) {
-    scores.put(name, scores.getOrDefault(name, 0) + score);
+    scores.put(name, score);
   }
   
 }
