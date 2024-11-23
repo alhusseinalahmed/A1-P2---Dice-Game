@@ -3,6 +3,7 @@ import java.util.ArrayList;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import com.example.dicegame.Game;
 import com.example.dicegame.Player;
@@ -52,7 +53,7 @@ public class GameTest {
   {
     game.setWinScore(10);
     game.updatePlayerScore(player1, 10);
-    assertTrue(game.isGameOver());
+    assertTrue(game.getGameOver());
   }
 
 }
