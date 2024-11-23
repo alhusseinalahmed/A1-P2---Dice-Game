@@ -47,4 +47,12 @@ public class GameTest {
 
   }
 
+  @Test
+  void shouldEndGameWhenWinScoreIsReached()
+  {
+    game.setWinScore(10);
+    game.updatePlayerScore(player1, 10);
+    assertTrue(game.isGameOver());
+  }
+
 }

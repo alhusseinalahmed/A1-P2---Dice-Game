@@ -19,8 +19,13 @@ public class Game {
 
   public int rollDice(Player player) {
     int diceScore = dice.roll();
-    player.addScore(diceScore);
-    scoreboard.updateScore(player.getName(), player.getScore());
+    updatePlayerScore(player, diceScore);
     return diceScore;
   }
+
+  public void updatePlayerScore(Player player, int diceScore) 
+  {
+    player.addScore(diceScore);
+    scoreboard.updateScore(player.getName(), player.getScore());
+  } 
 }
