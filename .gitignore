@@ -1,0 +1,42 @@
+# Maven
+target/
+*.log
+*.iml
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+
+# IDEs
+## IntelliJ IDEA
+.idea/
+*.iws
+*.ipr
+*.iml
+
+## Eclipse
+.project
+.classpath
+.settings/
+.metadata/
+
+## VS Code
+.vscode/
+
+# Operating System
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Others
+*.swp
+*.bak
+*.tmp
+*.orig
+*.old
+
+# Ignore Java build files
+*.class
