@@ -9,12 +9,15 @@ import com.example.dicegame.Player;
 
 public class GameTest {
   private Game game;
-
+  Player player1;
+  Player player2; 
   @BeforeEach
   void setUp() {
     ArrayList<Player> players = new ArrayList<>();
-    players.add(new Player("John"));
-    players.add(new Player("Jack"));
+    player1 = new Player("John");
+    player2 = new Player("Jack");
+    players.add(player1);
+    players.add(player2);
 
     game = new Game(players);
   }
@@ -38,9 +41,9 @@ public class GameTest {
   }
   @Test
   void shouldUpdateScoreAfterRoll() {
-    int diceScore = game.rollDice(game.getPlayers().get(0));
+    int diceScore = game.rollDice(player1);
 
-    assertEquals(game.getPlayers().get(0).getScore(), diceScore);
+    assertEquals(player1.getScore(), diceScore);
 
   }
 
