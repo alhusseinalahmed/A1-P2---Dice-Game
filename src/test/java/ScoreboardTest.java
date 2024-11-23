@@ -27,7 +27,6 @@ public class ScoreboardTest {
 
   @Test
   void shouldDisplayAllScores() {
-    Scoreboard scoreboard = new Scoreboard();
     scoreboard.updateScore("Player 1", 10);
     scoreboard.updateScore("Player 2", 15);
 
