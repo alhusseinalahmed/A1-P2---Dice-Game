@@ -2,6 +2,7 @@ import java.util.ArrayList;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import com.example.dicegame.Game;
 import com.example.dicegame.Player;
@@ -19,6 +20,6 @@ public class GameTest {
 
   @Test
   void gameShouldStartWithAtLeastTwoPlayers() {
-    assertEquals(2, game.getPlayers().size(), "Game should have two players initially.");
+    assertEquals(2, game.getPlayers().size(), "Game should have at least two players.");
   }
 }
