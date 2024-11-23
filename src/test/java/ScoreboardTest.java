@@ -15,4 +15,10 @@ public class ScoreboardTest {
   void shouldInitializeWithZeroScores() {
     assertEquals(0, scoreboard.getScore("Player 1"), "Player 1's score should be 0 initially.");
   }
+
+  @Test
+  void shouldUpdatePlayerScore() {
+    scoreboard.updateScore("Player 1", 5);
+    assertEquals(5, scoreboard.getScore("Player 1"), "Player 1's score should be 5 after updating.");
+  }
 }
