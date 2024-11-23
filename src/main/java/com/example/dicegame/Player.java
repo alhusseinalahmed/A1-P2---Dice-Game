@@ -24,4 +24,8 @@ public class Player {
   private void setScore(int score) {
     this.score = score;
   }
+
+  public void addScore(int score) {
+    setScore(getScore() + score);
+  }
 }
