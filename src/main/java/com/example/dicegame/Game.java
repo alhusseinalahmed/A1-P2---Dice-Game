@@ -8,6 +8,7 @@ public class Game {
   private ArrayList<Player> players = new ArrayList<>();
 
   public Game(ArrayList<Player> players) {
+    if(players.size() < 2) throw new IllegalArgumentException("Game should have at least two players.");
     this.players = players;
   }
 

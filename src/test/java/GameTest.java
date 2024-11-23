@@ -9,6 +9,7 @@ import com.example.dicegame.Player;
 
 public class GameTest {
   private Game game;
+
   @BeforeEach
   void setUp() {
     ArrayList<Player> players = new ArrayList<>();
@@ -22,4 +23,18 @@ public class GameTest {
   void gameShouldStartWithAtLeastTwoPlayers() {
     assertEquals(2, game.getPlayers().size(), "Game should have at least two players.");
   }
+
+  @Test
+  void gameShouldNotStartWithLessThanTwoPlayers() {
+    Exception exception = null;
+    try {
+      ArrayList<Player> players = new ArrayList<>();
+      Game invalidGame = new Game(players);
+    } catch (IllegalArgumentException e) {
+      exception = e;
+    }
+    assertEquals("Game should have at least two players.", exception.getMessage(),
+        "Exception message should indicate insufficient players.");
+  }
+
 }
