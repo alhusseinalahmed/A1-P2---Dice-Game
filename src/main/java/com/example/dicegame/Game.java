@@ -12,8 +12,9 @@ public class Game {
   private boolean isGameOver;
 
   public Game(ArrayList<Player> players) {
-    if (players.size() < 2)
+    if (players.size() < 2) {
       throw new IllegalArgumentException("Game should have at least two players.");
+    }
     this.players = players;
   }
 
@@ -38,6 +39,7 @@ public class Game {
   private void setGameOver(boolean isGameOver) {
     this.isGameOver = isGameOver;
   }
+
   public boolean getGameOver() {
     return isGameOver;
   }
