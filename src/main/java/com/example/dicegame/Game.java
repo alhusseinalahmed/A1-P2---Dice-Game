@@ -6,16 +6,17 @@ public class Game {
 
   private final Scoreboard scoreboard = new Scoreboard();
   private ArrayList<Player> players = new ArrayList<>();
-  private Dice dice = new Dice();
+  private Dice dice;
 
   private int winScore = 100;
   private boolean isGameOver;
 
-  public Game(ArrayList<Player> players) {
+  public Game(ArrayList<Player> players, Dice dice) {
     if (players.size() < 2) {
       throw new IllegalArgumentException("Game should have at least two players.");
     }
     this.players = players;
+    this.dice = dice;
   }
 
   public ArrayList<Player> getPlayers() {

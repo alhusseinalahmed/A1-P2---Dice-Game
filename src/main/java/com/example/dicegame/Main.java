@@ -25,7 +25,7 @@ public class Main {
 
               try
               {
-                Game game = new Game(players);
+                Game game = new Game(players, new Dice());
                 System.out.println("Game started with " + numPlayers + " players.");
 
                 while(!game.getGameOver())
