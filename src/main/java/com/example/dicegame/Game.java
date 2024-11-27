@@ -37,7 +37,7 @@ public class Game {
     }
   }
 
-  private void setGameOver(boolean isGameOver) {
+  public void setGameOver(boolean isGameOver) {
     this.isGameOver = isGameOver;
   }
 
