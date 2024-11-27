@@ -35,4 +35,13 @@ public class ScoreboardTest {
     assertEquals(10, allScores.get("Player 1"), "Player 1's score should be 10.");
     assertEquals(15, allScores.get("Player 2"), "Player 2's score should be 15.");
   }
+
+  @Test
+  void shouldReturnStringOfAllScores() {
+    scoreboard.updateScore("Player 1", 10);
+    scoreboard.updateScore("Player 2", 15);
+
+    String expected = "Scoreboard: \n Player 1: 10 \n Player 2: 15 \n";
+    assertEquals(expected, scoreboard.getAllScores().toString(), "All scores should be displayed as a string.");
+  }
 }

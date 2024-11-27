@@ -17,5 +17,4 @@ public class Scoreboard {
   public Map<String, Integer> getAllScores() {
     return new HashMap<>(scores);
   }
-  
 }
