@@ -35,9 +35,7 @@ public class DiceGameApp {
                   case "r":
                     int diceScore = game.rollDice(player);
                     System.out.println("You rolled a " + diceScore + ".");
-                    for (Player otherPlayer : game.getPlayers()) {
-                      System.out.println(otherPlayer.getName() + " has " + otherPlayer.getScore() + " points.");
-                    }
+                    System.out.println(game.getScoreboard().toString());
                     break;
                   case "q":
                     game.setGameOver(true);

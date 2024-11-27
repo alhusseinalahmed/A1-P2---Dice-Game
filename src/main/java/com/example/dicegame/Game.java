@@ -19,6 +19,10 @@ public class Game {
     this.dice = dice;
   }
 
+  public Scoreboard getScoreboard() {
+    return this.scoreboard;
+  }
+
   public ArrayList<Player> getPlayers() {
     return this.players;
   }
