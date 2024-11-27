@@ -1,3 +1,4 @@
+import com.example.dicegame.Player;
 import com.example.dicegame.Scoreboard;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -8,40 +9,45 @@ import org.junit.jupiter.api.Test;
 
 public class ScoreboardTest {
   private Scoreboard scoreboard;
+  private Player player1;
+  private Player player2;
 
   @BeforeEach
   void setUp() {
     scoreboard = new Scoreboard();
+    player1 = new Player("John");
+    player2 = new Player("Jack");
+
   }
 
   @Test
   void shouldInitializeWithZeroScores() {
-    assertEquals(0, scoreboard.getScore("Player 1"), "Player 1's score should be 0 initially.");
+    assertEquals(0, scoreboard.getScore(player1), "Player 1's score should be 0 initially.");
   }
 
   @Test
   void shouldUpdatePlayerScore() {
-    scoreboard.updateScore("Player 1", 5);
-    assertEquals(5, scoreboard.getScore("Player 1"), "Player 1's score should be 5 after updating.");
+    scoreboard.updateScore(player1, 5);
+    assertEquals(5, scoreboard.getScore(player1), "Player 1's score should be 5 after updating.");
   }
 
   @Test
   void shouldDisplayAllScores() {
-    scoreboard.updateScore("Player 1", 10);
-    scoreboard.updateScore("Player 2", 15);
+    scoreboard.updateScore(player1, 10);
+    scoreboard.updateScore(player2, 15);
 
-    Map<String, Integer> allScores = scoreboard.getAllScores();
+    Map<Player, Integer> allScores = scoreboard.getAllScores();
 
-    assertEquals(10, allScores.get("Player 1"), "Player 1's score should be 10.");
-    assertEquals(15, allScores.get("Player 2"), "Player 2's score should be 15.");
+    assertEquals(10, allScores.get(player1), "Player 1's score should be 10.");
+    assertEquals(15, allScores.get(player2), "Player 2's score should be 15.");
   }
 
   @Test
   void shouldReturnStringOfAllScores() {
-    scoreboard.updateScore("Player 1", 10);
-    scoreboard.updateScore("Player 2", 15);
+    scoreboard.updateScore(player1, 10);
+    scoreboard.updateScore(player2, 15);
 
-    String expected = "Scoreboard: \nPlayer 2: 15\nPlayer 1: 10\n";
+    String expected = "Scoreboard: \nJohn: 10\nJack: 15\n";
     assertEquals(expected, scoreboard.toString(), "All scores should be displayed as a string.");
   }
 }

@@ -4,24 +4,24 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Scoreboard {
-  private final Map<String, Integer> scores = new HashMap<>();
+  private final Map<Player, Integer> scores = new HashMap<>();
 
-  public int getScore(String name) {
+  public int getScore(Player name) {
     return scores.getOrDefault(name, 0);
   }
 
-  public void updateScore(String name, int score) {
-    scores.put(name, score);
+  public void updateScore(Player player, int score) {
+    scores.put(player, score);
   }
 
-  public Map<String, Integer> getAllScores() {
+  public Map<Player, Integer> getAllScores() {
     return new HashMap<>(scores);
   }
 
   public String toString() {
     String result = "Scoreboard: \n";
-    for(Map.Entry<String, Integer> entry : scores.entrySet()) {
-      result += entry.getKey() + ": " + entry.getValue() + "\n";
+    for(Map.Entry<Player, Integer> entry : scores.entrySet()) {
+      result += entry.getKey().getName() + ": " + entry.getValue() + "\n";
     }
     return result;
   }

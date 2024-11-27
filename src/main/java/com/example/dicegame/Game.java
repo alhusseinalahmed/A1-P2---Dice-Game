@@ -31,7 +31,7 @@ public class Game {
 
   public void updatePlayerScore(Player player, int diceScore) {
     player.addScore(diceScore);
-    scoreboard.updateScore(player.getName(), player.getScore());
+    scoreboard.updateScore(player, player.getScore());
     if (player.getScore() >= winScore) {
       setGameOver(true);
     }
