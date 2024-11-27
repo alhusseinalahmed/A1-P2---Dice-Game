@@ -41,7 +41,7 @@ public class ScoreboardTest {
     scoreboard.updateScore("Player 1", 10);
     scoreboard.updateScore("Player 2", 15);
 
-    String expected = "Scoreboard: \n Player 1: 10 \n Player 2: 15 \n";
-    assertEquals(expected, scoreboard.getAllScores().toString(), "All scores should be displayed as a string.");
+    String expected = "Scoreboard: \nPlayer 2: 15\nPlayer 1: 10\n";
+    assertEquals(expected, scoreboard.toString(), "All scores should be displayed as a string.");
   }
 }
