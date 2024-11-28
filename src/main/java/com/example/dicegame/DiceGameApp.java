@@ -5,9 +5,11 @@ import java.util.Scanner;
 
 public class DiceGameApp {
 
-  public void startGame(Scanner scanner) {
+  public void startGame(Scanner scanner, Dice dice) {
     System.out.println("Welcome to this dice game, let's play!");
     System.out.println("Type p to play or q to quit.");
+
+
     String option = scanner.nextLine();
     try {
       switch (option) {
@@ -23,7 +25,7 @@ public class DiceGameApp {
           }
 
           try {
-            Game game = new Game(players, new Dice());
+            Game game = new Game(players, dice);
             System.out.println("Game started with " + numPlayers + " players.");
 
             while (!game.getGameOver()) {
@@ -41,17 +43,12 @@ public class DiceGameApp {
                     game.setGameOver(true);
                     break;
                   default:
-                    System.out.println("Invalid input.");
+                    throw new IllegalArgumentException("Invalid input.");
                 }
               }
             }
 
-            Player winner = game.getPlayers().get(0);
-            for (Player player : game.getPlayers()) {
-              if (player.getScore() > winner.getScore()) {
-                winner = player;
-              }
-            }
+            Player winner = game.getScoreboard().getWinner();
             System.out.println("The winner is " + winner.getName() + " with " + winner.getScore() + " points.");
           } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());

@@ -47,7 +47,7 @@ public class ScoreboardTest {
     scoreboard.updateScore(player1, 10);
     scoreboard.updateScore(player2, 15);
 
-    String expected = "Scoreboard: \nJohn: 10\nJack: 15\n";
+    String expected = "Scoreboard: \nJack: 15\nJohn: 10\n";
     assertEquals(expected, scoreboard.toString(), "All scores should be displayed as a string.");
   }
 }

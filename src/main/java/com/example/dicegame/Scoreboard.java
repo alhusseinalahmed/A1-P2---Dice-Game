@@ -25,5 +25,17 @@ public class Scoreboard {
     }
     return result;
   }
+  
+  public Player getWinner() {
+    int maxScore = 0;
+    Player winner = null;
+    for(Map.Entry<Player, Integer> entry : scores.entrySet()) {
+      if (entry.getValue() > maxScore) {
+        maxScore = entry.getValue();
+        winner = entry.getKey();
+      }
+    }
+    return winner;
+  }
 
 }
