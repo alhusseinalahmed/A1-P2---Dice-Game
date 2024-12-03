@@ -1,6 +1,8 @@
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
+import java.util.InputMismatchException;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 import com.example.dicegame.DiceGameApp;
 import static org.mockito.Mockito.*;
@@ -55,13 +57,12 @@ public class DiceGameAppTest {
   @Test
   void testUnexpectedOption() {
     Scanner mockScanner = Mockito.mock(Scanner.class);
-    when(mockScanner.nextLine()).thenReturn("x"); // Unexpected input
+    when(mockScanner.nextLine()).thenThrow(new NoSuchElementException()); // Unexpected input
 
     DiceGameApp app = new DiceGameApp();
-    app.startGame(mockScanner, new Dice());
 
     // Verify interactions
-    verify(mockScanner, times(1)).nextLine();
+    assertThrows(Exception.class, () -> app.startGame(mockScanner, new Dice()));
   }
 
   @Test
@@ -72,10 +73,65 @@ public class DiceGameAppTest {
 
     DiceGameApp app = new DiceGameApp();
     app.startGame(mockScanner, new Dice());
+    verify(mockScanner, times(2)).nextLine(); // Ensure the input was read
+    verify(mockScanner, times(1)).nextInt(); // Ensure the invalid player count was requested
+  }
 
-    // Verify that invalid player count message was printed
-    verify(mockScanner, times(1)).nextInt();
-    verify(mockScanner, times(2)).nextLine(); // 1 for play, 1 for consume new line
+  @Test
+  void testInvalidInputOnRoll() {
+    Scanner mockScanner = Mockito.mock(Scanner.class);
+    Dice mockDice = Mockito.mock(Dice.class);
+
+    when(mockScanner.nextLine())
+        .thenReturn("p") // Start the game
+        .thenReturn("2") // Number of players
+        .thenReturn("John") // Player 1 name
+        .thenReturn("Jack") // Player 2 name
+        .thenReturn("z"); // Invalid input for player roll
+
+    when(mockScanner.nextInt()).thenReturn(2); // Number of players
+
+    DiceGameApp app = new DiceGameApp();
+
+    app.startGame(mockScanner, mockDice);
+
+    // Verify interactions
+    verify(mockScanner, atLeast(5)).nextLine(); // Ensure at least 5 inputs processed
+    verify(mockScanner, times(1)).nextInt(); // Ensure player count input was read
+  }
+
+  void testInvalidMenuInput() {
+    Scanner mockScanner = Mockito.mock(Scanner.class);
+    when(mockScanner.nextLine()).thenThrow(new InputMismatchException()); // Invalid input for menu
+
+    DiceGameApp app = new DiceGameApp();
+
+    app.startGame(mockScanner, new Dice());
+
+    // Verify interactions
+    verify(mockScanner, times(1)).nextLine(); // Ensure one input was read
+  }
+
+  void testInvalidSwitchOption() {
+    Scanner mockScanner = Mockito.mock(Scanner.class);
+
+    when(mockScanner.nextLine()).thenReturn("invalid"); // Invalid input during menu selection
+
+    DiceGameApp app = new DiceGameApp();
+
+    // Redirect System.out to capture output
+    var outStream = new java.io.ByteArrayOutputStream();
+    System.setOut(new java.io.PrintStream(outStream));
+
+    app.startGame(mockScanner, new Dice());
+
+    // Verify the correct error message was printed
+    String output = outStream.toString();
+    assertTrue(output.contains("Invalid input."), "Should print 'Invalid input.' for invalid menu option");
+
+    // Verify Scanner interaction
+    verify(mockScanner, times(1)).nextLine(); 
+
   }
 
   @Test

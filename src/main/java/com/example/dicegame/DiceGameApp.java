@@ -1,6 +1,7 @@
 package com.example.dicegame;
 
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class DiceGameApp {
@@ -18,7 +19,7 @@ public class DiceGameApp {
           scanner.nextLine(); // Consume newline
 
           if (numPlayers < 2 || numPlayers > 4) {
-            throw new IllegalArgumentException("Number of players must be between 2 and 4.");
+            throw new InputMismatchException("Number of players must be between 2 and 4.");
           }
 
           ArrayList<Player> players = new ArrayList<>();
@@ -44,7 +45,7 @@ public class DiceGameApp {
                 System.out.println("You rolled a " + diceScore + ".");
                 System.out.println(game.getScoreboard().toString());
               } else {
-                System.out.println("Invalid input.");
+                throw new InputMismatchException("Invalid input.");
               }
             }
           }
@@ -58,12 +59,10 @@ public class DiceGameApp {
           break;
 
         default:
-          System.out.println("Invalid input.");
+          throw new InputMismatchException("Invalid input.");
       }
-    } catch (IllegalArgumentException e) {
+    } catch (InputMismatchException e) {
       System.out.println(e.getMessage());
-    } catch (Exception e) {
-      System.out.println("An unexpected error occurred: " + e.getMessage());
     }
   }
 
