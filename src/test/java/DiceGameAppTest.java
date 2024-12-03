@@ -53,16 +53,29 @@ public class DiceGameAppTest {
   }
 
   @Test
-  void testUnexpectedException() {
+  void testUnexpectedOption() {
     Scanner mockScanner = Mockito.mock(Scanner.class);
-
-    when(mockScanner.nextLine()).thenThrow(new IllegalArgumentException());
+    when(mockScanner.nextLine()).thenReturn("x"); // Unexpected input
 
     DiceGameApp app = new DiceGameApp();
+    app.startGame(mockScanner, new Dice());
 
-    assertThrows(Exception.class, () -> {
-      app.startGame(mockScanner, new Dice());
-    });
+    // Verify interactions
+    verify(mockScanner, times(1)).nextLine();
+  }
+
+  @Test
+  void testIllegalPlayerCount() {
+    Scanner mockScanner = Mockito.mock(Scanner.class);
+    when(mockScanner.nextLine()).thenReturn("p");
+    when(mockScanner.nextInt()).thenReturn(5); // Invalid player count
+
+    DiceGameApp app = new DiceGameApp();
+    app.startGame(mockScanner, new Dice());
+
+    // Verify that invalid player count message was printed
+    verify(mockScanner, times(1)).nextInt();
+    verify(mockScanner, times(2)).nextLine(); // 1 for play, 1 for consume new line
   }
 
   @Test

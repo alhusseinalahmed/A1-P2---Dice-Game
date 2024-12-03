@@ -9,14 +9,18 @@ public class DiceGameApp {
     System.out.println("Welcome to this dice game, let's play!");
     System.out.println("Type p to play or q to quit.");
 
-
     String option = scanner.nextLine();
     try {
       switch (option) {
         case "p":
           System.out.println("Enter the number of players: (2-4)");
           int numPlayers = scanner.nextInt();
-          scanner.nextLine();
+          scanner.nextLine(); // Consume newline
+
+          if (numPlayers < 2 || numPlayers > 4) {
+            throw new IllegalArgumentException("Number of players must be between 2 and 4.");
+          }
+
           ArrayList<Player> players = new ArrayList<>();
           for (int i = 0; i < numPlayers; i++) {
             System.out.println("Enter player " + (i + 1) + " name: ");
@@ -24,43 +28,42 @@ public class DiceGameApp {
             players.add(new Player(name));
           }
 
-          try {
-            Game game = new Game(players, dice);
-            System.out.println("Game started with " + numPlayers + " players.");
+          Game game = new Game(players, dice);
+          System.out.println("Game started with " + numPlayers + " players.");
 
-            while (!game.getGameOver()) {
-              for (Player player : game.getPlayers()) {
-                System.out.println("It's " + player.getName() + "'s turn.");
-                System.out.println("Type r to roll the dice or q to quit.");
-                String playerOption = scanner.nextLine();
-                switch (playerOption) {
-                  case "r":
-                    int diceScore = game.rollDice(player);
-                    System.out.println("You rolled a " + diceScore + ".");
-                    System.out.println(game.getScoreboard().toString());
-                    break;
-                  case "q":
-                    game.setGameOver(true);
-                    break;
-                  default:
-                    throw new IllegalArgumentException("Invalid input.");
-                }
+          while (!game.getGameOver()) {
+            for (Player player : game.getPlayers()) {
+              System.out.println("It's " + player.getName() + "'s turn.");
+              System.out.println("Type r to roll the dice or q to quit.");
+              String playerOption = scanner.nextLine();
+              if ("q".equals(playerOption)) {
+                game.setGameOver(true);
+                break;
+              } else if ("r".equals(playerOption)) {
+                int diceScore = game.rollDice(player);
+                System.out.println("You rolled a " + diceScore + ".");
+                System.out.println(game.getScoreboard().toString());
+              } else {
+                System.out.println("Invalid input.");
               }
             }
-
-            Player winner = game.getScoreboard().getWinner();
-            System.out.println("The winner is " + winner.getName() + " with " + winner.getScore() + " points.");
-          } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
           }
+
+          Player winner = game.getScoreboard().getWinner();
+          System.out.println("The winner is " + winner.getName() + " with " + winner.getScore() + " points.");
           break;
 
         case "q":
-        default:
+          System.out.println("Goodbye!");
           break;
+
+        default:
+          System.out.println("Invalid input.");
       }
+    } catch (IllegalArgumentException e) {
+      System.out.println(e.getMessage());
     } catch (Exception e) {
-      System.out.println("Invalid input.");
+      System.out.println("An unexpected error occurred: " + e.getMessage());
     }
   }
 
