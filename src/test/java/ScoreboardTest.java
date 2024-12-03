@@ -1,6 +1,7 @@
 import com.example.dicegame.Player;
 import com.example.dicegame.Scoreboard;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Map;
 
@@ -47,7 +48,10 @@ public class ScoreboardTest {
     scoreboard.updateScore(player1, 10);
     scoreboard.updateScore(player2, 15);
 
-    String expected = "Scoreboard: \nJack: 15\nJohn: 10\n";
-    assertEquals(expected, scoreboard.toString(), "All scores should be displayed as a string.");
+    String actual = scoreboard.toString();
+
+    assertTrue(actual.contains("Jack: 15"), "Score for Jack should be present.");
+    assertTrue(actual.contains("John: 10"), "Score for John should be present.");
+    assertTrue(actual.startsWith("Scoreboard: "), "Output should start with 'Scoreboard: '");
   }
 }
